@@ -68,7 +68,7 @@ const StyledWrapper = styled.div`
   }
 
   button:hover .now {
-    transform: translateX(25px);
+    transform: translateX(2px);
     transition-delay: 300ms;
   }
 

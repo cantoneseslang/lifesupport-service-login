@@ -76,7 +76,7 @@ const StyledWrapper = styled.div`
   }
 `
 
-const CustomButton = ({ onClick }) => {
+const CustomButton = ({ onClick }: { onClick: () => void }) => {
   return (
     <StyledWrapper>
       <button onClick={onClick}>

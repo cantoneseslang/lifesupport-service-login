@@ -1,20 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useRouter } from 'next/navigation'
 import type { User } from '@supabase/auth-helpers-nextjs'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { Check } from 'lucide-react'
+import { useSupabase } from '../supabase-provider'
+import { useRouter } from 'next/navigation'
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null)
+  const supabase = useSupabase()
   const router = useRouter()
-  const supabase = createClientComponentClient({
-    supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  })
 
   useEffect(() => {
     const getUser = async () => {

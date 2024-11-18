@@ -418,6 +418,7 @@ const StyledWrapper = styled.div`
   /* ログアウトボタンのスタイル */
   .logout-button {
     margin-top: 1rem;           /* 上部に1remのマージンを追加 */
+    margin-bottom: 1rem; /* 新しく追加 */
     cursor: pointer;            /* マウスオーバー時にポインターカーソルを表示 */
     padding: 0.75rem;           /* 全ての側に0.75remのパディングを追加 */
     width: 100%;                /* 幅を親要素いっぱいに */
@@ -457,7 +458,7 @@ const StyledWrapper = styled.div`
   /* Add these styles to ensure the chatbot doesn't overlap with the dashboard content */
   position: relative;
   min-height: 100vh;
-  padding-bottom: 60px; /* Adjust this value based on the height of your chatbot button */
+  padding-bottom: 120px; /* 下の長さを 60px to 120px に変更 */
 
   #dify-chatbot-bubble-button {
     position: fixed;
@@ -482,14 +483,15 @@ const StyledWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: var(--black);
-    border-top: 1px solid var(--line);
-    @media (max-width: 768px) {
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1rem;
-    }
+    .footer {
+  　background-color: var(--black); /* 背景色を追加 */
+  　backdrop-filter: blur(8px); /* ぼかし効果を追加 */
+  
+  　@media (max-width: 768px) {
+    padding: 0.75rem;
+    background-color: var(--black); /* モバイル用の背景色を追加 */
   }
+}
 
   .footer-links {
     display: flex;

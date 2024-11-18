@@ -150,6 +150,21 @@ export default function Dashboard() {
           </div>
 
           <div className="section">
+            <h2 className="section-title">LINE自動化関連</h2>
+            <div className="button-group">
+              <Link href="#" className="styled-button inactive">
+                LINEチャットボット概要ヒアリング
+              </Link>
+              <Link href="#" className="styled-button inactive">
+                LINE必要データー取得
+              </Link>
+              <Link href="#" className="styled-button inactive">
+                LINEリッチテキストメニュー作成
+              </Link>
+            </div>
+          </div>
+
+          <div className="section">
             <h2 className="section-title">SNS自動化関連</h2>
             <div className="button-group">
               <Link href="#" className="styled-button inactive">

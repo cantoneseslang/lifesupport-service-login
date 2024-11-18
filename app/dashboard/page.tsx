@@ -203,7 +203,7 @@ export default function Dashboard() {
           </Link>
         </div>
         <div className="copyright">
-          © 香港LIFESUPPORT All Right Reserved.
+          © 香港LIFESUPPORT
         </div>
         <div className="social-links">
           <Link href="#" className="social-link">

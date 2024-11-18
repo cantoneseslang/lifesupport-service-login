@@ -141,6 +141,21 @@ export default function Dashboard() {
           </div>
 
           <div className="section">
+            <h2 className="section-title">SNS自動化関連</h2>
+            <div className="button-group">
+              <Link href="#" className="styled-button inactive">
+                𝕏投稿コンテンツ自動作成
+              </Link>
+              <Link href="#" className="styled-button inactive">
+                𝕏自動投稿(絵付き)
+              </Link>
+              <Link href="#" className="styled-button inactive">
+                インスタグラム自動投稿(絵付き)
+              </Link>
+            </div>
+          </div>
+          
+          <div className="section">
             <h2 className="section-title">仕事効率化ツール関連</h2>
             <div className="button-group">
               <Link 

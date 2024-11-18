@@ -1,11 +1,3 @@
-declare global {
-  interface Window {
-    difyChatbotConfig?: {
-      token: string;
-    };
-  }
-}
-
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -14,7 +6,34 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { useSupabase } from '../supabase-provider'
 import { useRouter } from 'next/navigation'
+import { createGlobalStyle } from 'styled-components'
 import Script from 'next/script'
+
+declare global {
+  interface Window {
+    difyChatbotConfig?: {
+      token: string;
+    };
+  }
+}
+
+const GlobalStyle = createGlobalStyle`
+  #dify-chatbot-bubble-button {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 10000 !important;
+    background-color: #1C64F2 !important;
+  }
+  #dify-chatbot-bubble-window {
+    position: fixed !important;
+    bottom: 80px !important;
+    right: 20px !important;
+    z-index: 10001 !important;
+    width: 24rem !important;
+    height: 40rem !important;
+  }
+`
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null)
@@ -53,7 +72,6 @@ export default function Dashboard() {
     }
     getUser()
 
-    // Initialize Dify chatbot configuration
     if (typeof window !== 'undefined') {
       window.difyChatbotConfig = {
         token: '2EVbZSnoP7luoOe7'
@@ -73,7 +91,7 @@ export default function Dashboard() {
   if (!user) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-white">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-400"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-400" />
       </div>
     )
   }
@@ -119,22 +137,13 @@ export default function Dashboard() {
           <div className="section">
             <h2 className="section-title">AIサービス関連</h2>
             <div className="button-group">
-              <Link 
-                href="#" 
-                className="styled-button inactive"
-              >
+              <Link href="#" className="styled-button inactive">
                 AIチャットボット用情報登録
               </Link>
-              <Link 
-                href="#" 
-                className="styled-button inactive"
-              >
+              <Link href="#" className="styled-button inactive">
                 AIチャットボットデーター登録
               </Link>
-              <Link 
-                href="#" 
-                className="styled-button inactive"
-              >
+              <Link href="#" className="styled-button inactive">
                 AIチャットボットファイル保存場所
               </Link>
             </div>
@@ -158,22 +167,13 @@ export default function Dashboard() {
           <div className="section">
             <h2 className="section-title">仕事効率化ツール関連</h2>
             <div className="button-group">
-              <Link 
-                href="#" 
-                className="styled-button inactive"
-              >
+              <Link href="#" className="styled-button inactive">
                 AIスクレイプツール
               </Link>
-              <Link 
-                href="#" 
-                className="styled-button inactive"
-              >
+              <Link href="#" className="styled-button inactive">
                 AI情報整理
               </Link>
-              <Link 
-                href="#" 
-                className="styled-button inactive"
-              >
+              <Link href="#" className="styled-button inactive">
                 AI資料作成
               </Link>
             </div>
@@ -203,7 +203,7 @@ export default function Dashboard() {
           </Link>
         </div>
         <div className="copyright">
-          © 香港LIFESUPPORT
+          © 香港LIFESUPPORT All Right Reserved.
         </div>
         <div className="social-links">
           <Link href="#" className="social-link">
@@ -223,21 +223,12 @@ export default function Dashboard() {
           </Link>
         </div>
       </footer>
-      {/* Dify Chatbot Scripts */}
       <Script
         src="https://udify.app/embed.min.js"
         id="2EVbZSnoP7luoOe7"
         strategy="afterInteractive"
       />
-      <style jsx global>{`
-        #dify-chatbot-bubble-button {
-          background-color: #1C64F2 !important;
-        }
-        #dify-chatbot-bubble-window {
-          width: 24rem !important;
-          height: 40rem !important;
-        }
-      `}</style>
+      <GlobalStyle />
     </StyledWrapper>
   )
 }

@@ -1,5 +1,4 @@
 import { SupabaseProvider } from './supabase-provider'
-import './globals.css'
 
 export default function RootLayout({
   children,
@@ -8,6 +7,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.difyChatbotConfig = {
+                token: '2EVbZSnoP7luoOe7'
+              }
+            `,
+          }}
+        />
+        <script
+          src="https://udify.app/embed.min.js"
+          id="2EVbZSnoP7luoOe7"
+          defer
+        />
+      </head>
       <body>
         <SupabaseProvider>
           {children}

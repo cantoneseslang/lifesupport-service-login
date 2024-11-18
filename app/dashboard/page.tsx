@@ -1,3 +1,11 @@
+declare global {
+  interface Window {
+    difyChatbotConfig?: {
+      token: string;
+    };
+  }
+}
+
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -6,6 +14,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { useSupabase } from '../supabase-provider'
 import { useRouter } from 'next/navigation'
+import Script from 'next/script'
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null)
@@ -43,6 +52,13 @@ export default function Dashboard() {
       }
     }
     getUser()
+
+    // Initialize Dify chatbot configuration
+    if (typeof window !== 'undefined') {
+      window.difyChatbotConfig = {
+        token: '2EVbZSnoP7luoOe7'
+      }
+    }
   }, [supabase, router])
 
   const handleSignOut = async () => {
@@ -75,7 +91,7 @@ export default function Dashboard() {
           <div className="section">
             <h2 className="section-title">ホームページ関連</h2>
             <div className="button-group">
-            <Link 
+              <Link 
                 href="https://b_cVhY2jdnmNj.v0.build/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -94,9 +110,9 @@ export default function Dashboard() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="styled-button inactive"
->
-  ロゴ・名刺作成情報登録
-</Link>
+              >
+                ロゴ・名刺作成情報登録
+              </Link>
             </div>
           </div>
 
@@ -152,6 +168,61 @@ export default function Dashboard() {
           ログアウト
         </button>
       </div>
+      <footer className="footer">
+        <div className="footer-links">
+          <Link 
+            href="https://docs.google.com/forms/d/e/1FAIpQLSePpVeWRt4F_UeJfCTQUQslLi4oX0FqHN6-OCQwWzzDuA3-rw/viewform" 
+            className="footer-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            お問い合わせ
+          </Link>
+          <Link 
+            href="https://lifesupporthk.com/%e8%87%aa%e5%b7%b1%e7%b4%b9%e4%bb%8b/" 
+            className="footer-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            会社概要
+          </Link>
+        </div>
+        <div className="copyright">
+          © 香港LIFESUPPORT
+        </div>
+        <div className="social-links">
+          <Link href="#" className="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </Link>
+          <Link href="#" className="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </Link>
+          <Link href="#" className="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </Link>
+        </div>
+      </footer>
+      {/* Dify Chatbot Scripts */}
+      <Script
+        src="https://udify.app/embed.min.js"
+        id="2EVbZSnoP7luoOe7"
+        strategy="afterInteractive"
+      />
+      <style jsx global>{`
+        #dify-chatbot-bubble-button {
+          background-color: #1C64F2 !important;
+        }
+        #dify-chatbot-bubble-window {
+          width: 24rem !important;
+          height: 40rem !important;
+        }
+      `}</style>
     </StyledWrapper>
   )
 }
@@ -297,7 +368,7 @@ const StyledWrapper = styled.div`
   .button-group {
     display: grid;              /* グリッドレイアウトを使用 */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* レスポンシブなグリッド列を設定 */
-    gap: 1rem;                  /* グリッドアイテム間に1remの間隔を設定 */
+    gap: 3rem;                  /* グリッドアイテム間に1remの間隔を設定 */
   }
 
   /* スタイル付きボタンのスタイル */
@@ -380,6 +451,101 @@ const StyledWrapper = styled.div`
   @media (min-width: 1024px) {
     .button-group {
       grid-template-columns: repeat(3, 1fr); /* 大画面では3列のグリッドに */
+    }
+  }
+
+  /* Add these styles to ensure the chatbot doesn't overlap with the dashboard content */
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 60px; /* Adjust this value based on the height of your chatbot button */
+
+  #dify-chatbot-bubble-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  #dify-chatbot-bubble-window {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 1001;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--black);
+    border-top: 1px solid var(--line);
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    padding-left: 3rem; /* 左側の余白を追加 */
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding-left: 0; /* モバイル表示時は中央揃えのままにする */
+    }
+  }
+
+  .footer-link {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--primary);
+  }
+　.copyright {
+    color: var(--paragraph);
+    font-size: 0.7rem; /* 変更箇所 */
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-link {
+    color: var(--white);
+    transition: color 0.3s ease;
+  }
+
+  .social-link:hover {
+    color: var(--primary);
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .footer-links {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
     }
   }
 `

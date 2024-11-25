@@ -127,7 +127,7 @@ export default function Dashboard() {
                 href="https://udify.app/chat/2EVbZSnoP7luoOe7"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="styled-button inactive"
+                className="styled-button"
               >
                 ロゴ・名刺作成情報登録
               </Link>

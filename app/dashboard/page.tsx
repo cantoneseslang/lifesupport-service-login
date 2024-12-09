@@ -124,10 +124,10 @@ export default function Dashboard() {
                 カスタマー情報登録
               </Link>
               <Link 
-                href="https://udify.app/chat/2EVbZSnoP7luoOe7"
+                href="https://forms.gle/iG5w8A4tCv5iyqVbA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="styled-button inactive"
+                className="styled-button"
               >
                 ロゴ・名刺作成情報登録
               </Link>

@@ -42,53 +42,56 @@ const StyledWrapper = styled.div`
     text-align: center;
   }
 
-  button {
+  .button.google {
+    max-width: 320px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 0 10px;
-    color: white;
-    text-shadow: 2px 2px rgb(116, 116, 116);
+    padding: 0.5rem 1.4rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    text-align: center;
     text-transform: uppercase;
-    cursor: pointer;
-    border: solid 2px black;
-    letter-spacing: 1px;
-    font-weight: 600;
-    font-size: 17px;
-    background-color: #31afeb;
-    border-radius: 50px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.5s ease;
-  }
-
-  .button-content {
-    display: flex;
+    vertical-align: middle;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(50, 50, 80, 0.25);
+    gap: 0.75rem;
+    color: #ffffff;
+    background-color: rgb(50, 50, 80);
+    cursor: pointer;
+    transition: all 0.6s ease;
+    text-decoration: none;
   }
 
-  .google-icon {
-    width: 10px;
-    height: 10px;
+  .button.google svg {
+    height: 24px;
+    width: 24px;
+    fill: #fff;
+    margin-right: 0.5rem;
+  }
+
+  .button.google:hover {
+    transform: scale(1.02);
+    background-color: rgb(90, 90, 120);
+    box-shadow: 0 2px 4px rgba(90, 90, 120, 0.1);
+  }
+
+  .button.google:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 40, 0.3);
+  }
+
+  .button.google:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+
+  @media (max-width: 480px) {
+    .button.google {
+      max-width: 100%;
+    }
   }
 `
-
-const CustomButton = ({ onClick }: { onClick: () => void }) => {
-  return (
-    <button onClick={onClick}>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20px" height="20px">
-        <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
-        <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
-        <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
-        <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
-      </svg>
-      <span>Googleでログイン</span>
-    </button>
-  );
-};
 
 export default function Login() {
   const [supabase] = useState(() => createClientComponentClient())
@@ -97,8 +100,8 @@ export default function Login() {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${typeof window !== 'undefined' ? window.location.origin : ''}/dashboard`
-      }
+        redirectTo: `${typeof window !== 'undefined' ? window.location.origin : ''}/dashboard`,
+      },
     })
   }
 
@@ -116,7 +119,27 @@ export default function Login() {
           <p className="welcome-text">ようこそLIFESUPPORT-AI部門へ</p>
         </div>
 
-        <CustomButton onClick={handleGoogleLogin} />
+        <button className="button google" onClick={handleGoogleLogin}>
+          <svg viewBox="0 0 256 262" preserveAspectRatio="xMidYMid" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
+              fill="#4285F4"
+            />
+            <path
+              d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"
+              fill="#34A853"
+            />
+            <path
+              d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"
+              fill="#FBBC05"
+            />
+            <path
+              d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
+              fill="#EB4335"
+            />
+          </svg>
+          Continue with Google
+        </button>
 
         <p className="info-text">
           現在認証はGoogleアカウントのみとなっております

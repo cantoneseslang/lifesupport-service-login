@@ -193,6 +193,20 @@ export default function Dashboard() {
               </Link>
             </div>
           </div>
+          <div className="section">
+            <h2 className="section-title">業務自動化関連</h2>
+            <div className="button-group">
+              <Link href="#" className="styled-button inactive">
+                会議議事録自動作成
+              </Link>
+              <Link href="#" className="styled-button inactive">
+                パワポ資料自動作成
+              </Link>
+              <Link href="#" className="styled-button inactive">
+                その他資料作成
+              </Link>
+            </div>
+          </div>
         </div>
         <button onClick={handleSignOut} className="logout-button">
           ログアウト
